@@ -26,12 +26,15 @@ Before running this project, please ensure that you have the following prerequis
 
 ## Running the Application
 
+![image](https://github.com/shasha1832/TicketSystemApp/assets/22574785/6b9427a3-33a6-4606-943a-db3c76425b71)
+
 1. **Start the Application:**
    - Once the project is successfully built, start the Spring Boot application by running the main class (`MyTicketSystemController.java`) from your IDE.
 
 2. **Accessing the Endpoints:**
    - The application will start on a default port (usually 8080). You can access the endpoints using tools like Postman or any web browser.
    - Refer to the API documentation below for details on available endpoints and their usage.
+ ![image](https://github.com/shasha1832/TicketSystemApp/assets/22574785/7161a938-1cf9-4422-8478-7a9b4b7513ab)
 
 ## REST API Endpoints Documentation
 
