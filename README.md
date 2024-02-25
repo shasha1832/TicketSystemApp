@@ -1,3 +1,22 @@
+## App to be Coded
+I want to board a train from London to France. The train ticket will cost $20.
+Create API where you can submit a purchase for a ticket. Details included in the receipt are:
+From, To, User, price paid.
+User should include first and last name, email address.
+The user is allocated a seat on the train. Assume the train has only 2 sections, section A and section B.
+- An API that shows the details of the receipt for the user.
+- An API that lets you view the users and seats they are allocated by the requested section.
+- An API to remove a user from the train.
+- An API to modify a user's seat.
+
+### Assumptions for this App:
+- There is only one train.
+- The ticket price is fixed at $20.
+- There are 2 sections, A and B, each containing 10 seats.
+- Users are identified by their email addresses, and multiple bookings are not allowed with the same email ID.
+- Seats are allocated sequentially at the time of purchase, filling Section A first and then Section B.
+- Data is stored in memory as a list but could be replaced with a database.
+
 ## Prerequisites
 
 Before running this project, please ensure that you have the following prerequisites installed:
@@ -93,3 +112,20 @@ This endpoint modifies a user's seat by providing the email, preferred section n
   - `preferedSectionName`
   - `preferedSeatNumber`
 - **Example:** `localhost:8080/editUserJourneyDetails?email=test@gmail.com&preferedSectionName=B&preferedSeatNumber=10`
+
+## Dockerfile
+
+The Dockerfile provided with this project facilitates containerizing the application for easy deployment.
+
+## To build the Docker image
+
+Navigate to the directory containing the Dockerfile and run the following command:
+
+docker build -t my-ticket-system-image .
+
+Once the image is built
+You can run the Docker container using the following command:
+
+docker run -d -p 8080:8080 my-ticket-system-image
+
+This will start the application inside the Docker container, and it will be accessible at http://localhost:8080. Adjust the port mapping as needed based on your application's configuration.
