@@ -3,7 +3,10 @@ package com.cloud.me;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
+/**
+ * This class represents user journey apis
+ *
+ */
 public class MyTicketSystemServiceImpl implements MyTicketSystemServiceInterface {
 	private static int seatCounterSectionA =1;
 	private static int seatCounterSectionB =1;
@@ -12,6 +15,10 @@ public class MyTicketSystemServiceImpl implements MyTicketSystemServiceInterface
 
 	@Override
 	public String purchaseTicket(UserJourneyDetails userJourneyDetails) {
+		/*
+		 * @param userJourneyDetails JourneyDetailsObject
+		 * @return message
+		 */
 		try {
 			if (!checkDuplicateUser(listOfUserJourneyDetails, userJourneyDetails)) {
 				userJourneyDetails = generateSeatDetailsForPurchaseTicket(userJourneyDetails);
@@ -68,12 +75,15 @@ public class MyTicketSystemServiceImpl implements MyTicketSystemServiceInterface
 		while(itr.hasNext()) {
 			UserJourneyDetails ujd = (UserJourneyDetails)itr.next();
 			if (ujd.getEmail().equals(email)) {
-				listOfUserJourneyDetails.remove(ujd);
+//				listOfUserJourneyDetails.remove(ujd);
+				itr.remove();
 				message = "User details deleted of "+ ujd.getFirstName();
 				break;
 			}
 		}
 		return message;
+//		boolean removed = listOfUserJourneyDetails.removeIf(ujd -> ujd.getEmail().equals(email));
+//	    return removed ? "User details deleted" : "No user deleted";
 	}
 
 
@@ -113,14 +123,15 @@ public class MyTicketSystemServiceImpl implements MyTicketSystemServiceInterface
 			}
 		}
 		return duplicateFound;
-		
+//		 return listDetails.stream()
+//		            .anyMatch(ujd -> ujd.getEmail().equals(user.getEmail()));
+//		
 	}
 	
 	public boolean checkPreferdSeatIsEmpty(String preferedSectionName, int preferedSeatNumber) {
 		boolean preferedSeatIsEmpty = true;
 		if(!(preferedSectionName.equals("A") || preferedSectionName.equals("B")) || preferedSeatNumber > maxNumberofSeatsinSection) {
-			preferedSeatIsEmpty = false;
-			return preferedSeatIsEmpty;
+			return false;
 		}
 		
 		for(UserJourneyDetails ujd : listOfUserJourneyDetails) {
@@ -130,6 +141,10 @@ public class MyTicketSystemServiceImpl implements MyTicketSystemServiceInterface
 			}
 		}
 		return preferedSeatIsEmpty;
+//		  Predicate<UserJourneyDetails> seatOccupiedPredicate = ujd -> preferedSectionName.equals(ujd.getSectionName()) && preferedSeatNumber == ujd.getSeatNumber();
+//
+//		    return listOfUserJourneyDetails.stream()
+//		            .noneMatch(seatOccupiedPredicate);
 	}
 
 }

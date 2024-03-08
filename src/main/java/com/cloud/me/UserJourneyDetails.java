@@ -1,7 +1,7 @@
 package com.cloud.me;
 
 
-public class UserJourneyDetails {
+public class UserJourneyDetails{
 private String firstName;
 private final int tickePrice = 20;
 public int getTickePrice() {

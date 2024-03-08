@@ -4,6 +4,9 @@ import java.util.List;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @SpringBootApplication
@@ -32,6 +35,16 @@ public class MyTicketSystemController {
 	@GetMapping("/viewRequestedSectionDetails")
 	public List<UserJourneyDetails> viewRequestedSectionDetails(@RequestParam String sectionName){
 		return impl.viewRequestedSectionDetails(sectionName);
+	}
+	
+	@GetMapping(value = "/sections/{sectionName}/details", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	public ResponseEntity<List<UserJourneyDetails>> richSectionDetails(@PathVariable String sectionName) {
+		List<UserJourneyDetails> details = impl.viewRequestedSectionDetails(sectionName);
+		if (details.isEmpty()) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    } else {
+	        return new ResponseEntity<>(details, HttpStatus.OK);
+	    }
 	}
 	
 	@DeleteMapping("/deleteUserJourneyDetails")
